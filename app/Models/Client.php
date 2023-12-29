@@ -29,4 +29,23 @@ class Client extends Model
         return Carbon::parse(($value))->format('d M Y');
     }
 
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    /**
+     * Get all of the titledeed for the Client
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function titledeed(): HasMany
+    {
+        return $this->hasMany(Titledeed::class, 'client_id');
+    }
 }

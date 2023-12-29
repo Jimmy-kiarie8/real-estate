@@ -64,25 +64,9 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    /**
-     * Get all of the calls for the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function calls(): HasMany
-    {
-        return $this->hasMany(Callcenter::class, 'agent_id');
+    public function company() {
+        return $this->belongsTo(Company::class);
     }
 
-
-    public function leads(): HasMany
-    {
-        return $this->hasMany(Lead::class, 'agent_id');
-    }
-
-    public function tickets(): HasMany
-    {
-        return $this->hasMany(Ticket::class, 'user_id');
-    }
 
 }
