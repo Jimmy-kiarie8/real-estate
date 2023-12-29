@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSaleofficerRequest;
 use App\Http\Requests\UpdateSaleofficerRequest;
+use App\Models\Category;
+use App\Models\Client;
 use App\Models\Saleofficer;
 use Inertia\Inertia;
 
@@ -15,6 +17,7 @@ class SaleofficerController extends Controller
     public function index()
     {
         $saleofficers = Saleofficer::paginate(100);
+        $clients = Category::select('id','name')->take(100)->get();
 
         $jsonFile = public_path('data/sale-officer.json'); // Get the full path to the JSON file
 
@@ -22,7 +25,6 @@ class SaleofficerController extends Controller
             $jsonContents = file_get_contents($jsonFile);
             $jsonData = json_decode($jsonContents, true);
 
-            $client_form = $jsonData;
 
         } else {
             return response('JSON file not found', 404);
@@ -38,11 +40,13 @@ class SaleofficerController extends Controller
             ];
         }
 
+        // return  $jsonData;
+
         $headers[] = ['title' => 'Actions', 'key' => 'actions'];
 
         return Inertia::render('Saleofficer/index', [
             'data' => $saleofficers,
-            'form_data' => $client_form,
+            'form_data' => $jsonData,
             'headers' => $headers,
             'title' => 'Sale Officer',
             'modelRoute' => 'saleofficers',
@@ -62,8 +66,7 @@ class SaleofficerController extends Controller
      */
     public function store(StoreSaleofficerRequest $request)
     {
-
-        $data = $request->all();
+         $data = $request->all();
         $dataValue = [];
 
         foreach ($data as $item) {

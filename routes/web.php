@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PlotController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SaleController;
@@ -42,6 +43,7 @@ Route::resource('invoice', InvoiceController::class);
 Route::resource('title-deed', TitledeedController::class);
 Route::resource('payment', PaymentController::class);
 Route::resource('sales', SaleController::class);
+Route::resource('plot', PlotController::class);
 
 Route::get('analytics', [DashboardController::class, 'analytics']);
 

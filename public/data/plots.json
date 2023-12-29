@@ -1,18 +1,18 @@
 [
     {
-        "label": "Type",
+        "label": "Plot No.",
         "value": "",
-        "model": "type",
+        "model": "plot_no",
         "type": "text",
         "display": true,
         "table_display": true,
         "items": []
     },
     {
-        "label": "Description",
-        "value": "",
-        "model": "description",
-        "type": "long_text",
+        "label": "Project Id",
+        "value": null,
+        "model": "project_id",
+        "type": "select",
         "display": true,
         "table_display": true,
         "items": []

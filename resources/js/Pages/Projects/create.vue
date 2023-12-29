@@ -52,7 +52,7 @@ export default {
     methods: {
         submit() {
             console.log(this.form_data);
-                this.$inertia.post(`/${this.route}`, this.form_data, {
+                this.$inertia.post(`/${this.modelRoute}`, this.form_data, {
                     onError: () => {},
                     onSuccess: () => {
                         console.log('success');

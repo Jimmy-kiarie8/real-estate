@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePlotRequest;
 use App\Http\Requests\UpdatePlotRequest;
 use App\Models\Plot;
+use App\Models\Project;
+use Inertia\Inertia;
 
 class PlotController extends Controller
 {
@@ -13,7 +15,51 @@ class PlotController extends Controller
      */
     public function index()
     {
-        //
+
+        $plots = Plot::paginate();
+        $projects = Project::select('id', 'name')->take(100)->get();
+
+        $jsonFile = public_path('data/plots.json'); // Get the full path to the JSON file
+
+        if (file_exists($jsonFile)) {
+            $jsonContents = file_get_contents($jsonFile);
+            $jsonData = json_decode($jsonContents, true);
+
+            foreach ($jsonData as $key => $item) {
+                if ($item['type'] == 'select' && $item['model'] == 'project_id') {
+                    $jsonData[$key]['items'] = $projects;
+
+                    foreach ($jsonData[$key]['items'] as &$plot) {
+                        $plot['value'] = $plot['id'];
+                        $plot['label'] = $plot['name'];
+                    }
+                }
+            }
+        } else {
+            return response('JSON file not found', 404);
+        }
+
+        // return $jsonData;
+
+        $headers = [];
+        $headers[] = ['title' => 'Created At', 'key' => 'created_at'];
+
+        foreach ($jsonData as $item) {
+            $headers[] = [
+                'title' => $item['label'],
+                'key' => $item['model']
+            ];
+        }
+
+        $headers[] = ['title' => 'Actions', 'key' => 'actions'];
+
+        return Inertia::render('Plot/index', [
+            'data' => $plots,
+            'form_data' => $jsonData,
+            'headers' => $headers,
+            'title' => 'Plots',
+            'modelRoute' => 'plot',
+        ]);
     }
 
     /**
@@ -29,7 +75,24 @@ class PlotController extends Controller
      */
     public function store(StorePlotRequest $request)
     {
-        //
+        $data = $request->all();
+        $dataValue = [];
+
+        foreach ($data as $item) {
+            $model = $item['model'];
+            if ($item['type']  == 'radio') {
+                $value = ($item['value'] == 'Yes') ? true : false;
+            } else {
+                $value = $item['value'];
+            }
+
+            $dataValue[$model] = $value;
+        }
+        $dataValue['project_id'] = $dataValue['project_id']['id'];
+        // return $dataValue;
+        Plot::create($dataValue);
+
+        return redirect()->back()->with('message', 'Contact created');
     }
 
     /**

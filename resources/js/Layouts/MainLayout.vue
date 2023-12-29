@@ -31,6 +31,20 @@ const links = [
         subMenu: []
     },
     {
+        text: 'Client',
+        link: '/clients',
+        icon: 'mdi-badge-account-alert-outline',
+        hasSub: false,
+        subMenu: []
+    },
+    {
+        text: 'Plot',
+        link: '/plot',
+        icon: 'mdi-badge-account-alert-outline',
+        hasSub: false,
+        subMenu: []
+    },
+    {
         text: 'Sale Officers',
         link: '/saleofficers',
         icon: 'mdi-card-account-phone',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CategoryController extends Controller
@@ -50,11 +51,24 @@ class CategoryController extends Controller
     {
     }
 
-    public function store(CategoryRequest $request)
+    public function store(Request $request)
     {
-        Category::create($request->validated());
+        $data = $request->all();
+        $dataValue = [];
 
-        return to_route('categories.index');
+        foreach ($data as $item) {
+            $model = $item['model'];
+            if ($item['type']  == 'radio') {
+                $value = ($item['value'] == 'Yes') ? true : false;
+            } else {
+                $value = $item['value'];
+            }
+
+            $dataValue[$model] = $value;
+        }
+        Category::create($dataValue);
+
+        return redirect()->back()->with('message', 'Contact created');
     }
 
     public function show(Category $category) {}

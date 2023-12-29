@@ -45,15 +45,6 @@
         "items": []
     },
     {
-        "label": "Category",
-        "value": null,
-        "model": "category",
-        "type": "select",
-        "display": true,
-        "table_display": true,
-        "items": []
-    },
-    {
         "label": "Nok Details",
         "value": "",
         "model": "nok_details",
