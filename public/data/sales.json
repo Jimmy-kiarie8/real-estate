@@ -1,0 +1,47 @@
+[
+    {
+        "label": "Sale No",
+        "value": null,
+        "model": "target",
+        "type": "date",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Plot No.",
+        "value": "",
+        "model": "plot_id",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Sales Officer",
+        "value": null,
+        "model": "sales_officer_id",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Client",
+        "value": null,
+        "model": "client_id",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Project",
+        "value": null,
+        "model": "project_id",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": []
+    }
+]

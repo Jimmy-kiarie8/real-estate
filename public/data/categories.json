@@ -1,0 +1,38 @@
+[
+    {
+        "label": "Code",
+        "value": "",
+        "model": "code",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Name",
+        "value": "",
+        "model": "name",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Is visible",
+        "value": "Yes",
+        "model": "is_visible",
+        "type": "radio",
+        "display": true,
+        "table_display": true,
+        "items": ["Yes", "No"]
+    },
+    {
+        "label": "Other Details",
+        "value": null,
+        "model": "category_id",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": []
+    }
+]

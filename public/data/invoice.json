@@ -1,0 +1,47 @@
+[
+    {
+        "label": "Client",
+        "value": null,
+        "model": "client_id",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Unit number",
+        "value": "",
+        "model": "unit_number",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Amount payable",
+        "value": "",
+        "model": "amount_payable",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Installment count",
+        "value": "",
+        "model": "installment_count",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Sale Officer",
+        "value": null,
+        "model": "sales_officer_id",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": []
+    }
+]

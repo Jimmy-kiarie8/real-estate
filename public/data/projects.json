@@ -1,0 +1,38 @@
+[
+    {
+        "label": "Name",
+        "value": "",
+        "model": "name",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Total units",
+        "value": "",
+        "model": "total_units",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Location",
+        "value": "",
+        "model": "location",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Other Details",
+        "value": "",
+        "model": "other_project_details",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    }
+]

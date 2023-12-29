@@ -1,0 +1,38 @@
+[
+    {
+        "label": "Name",
+        "value": "",
+        "model": "name",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Email",
+        "value": "",
+        "model": "email",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Phone No",
+        "value": "",
+        "model": "Phone",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Address",
+        "value": "",
+        "model": "address",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    }
+]

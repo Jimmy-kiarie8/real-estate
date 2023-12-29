@@ -1,0 +1,47 @@
+[
+    {
+        "label": "Payment Date",
+        "value": null,
+        "model": "payment_date",
+        "type": "date",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Payment Mode",
+        "value": "",
+        "model": "payment_mode",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Amount Paid",
+        "value": "",
+        "model": "amount_paid",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Sale",
+        "value": null,
+        "model": "sale_id",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Item paid for",
+        "value": null,
+        "model": "item",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": ["Plot", "Charge"]
+    }
+]

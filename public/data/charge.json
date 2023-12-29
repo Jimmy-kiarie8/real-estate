@@ -1,0 +1,29 @@
+[
+    {
+        "label": "Code",
+        "value": "",
+        "model": "code",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Type",
+        "value": "",
+        "model": "type",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Description",
+        "value": "",
+        "model": "description",
+        "type": "long_text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    }
+]

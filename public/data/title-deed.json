@@ -1,0 +1,38 @@
+[
+    {
+        "label": "Issuance Date",
+        "value": null,
+        "model": "issuance_date",
+        "type": "date",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Plot Number",
+        "value": "",
+        "model": "plot_number",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Status",
+        "value": "",
+        "model": "status",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": [ "Collected", "Uncollected"]
+    },
+    {
+        "label": "Item paid for",
+        "value": null,
+        "model": "client_id",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": []
+    }
+]
