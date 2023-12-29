@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('unit_number')->nullable();
+            $table->string('invoice_no')->nullable();
             $table->decimal('amount_payable')->nullable();
             $table->integer('installment_count')->nullable();
+            $table->integer('installment_paid')->nullable();
 
-            $table->unsignedBigInteger('client_id')->nullable();
-            $table->unsignedBigInteger('sales_officer_id')->nullable();
+            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('sales_officer_id');
+            $table->unsignedBigInteger('sales_id');
 
+            $table->foreign('sales_id')->references('id')->on('sales')->onDelete('cascade');
             $table->foreign('sales_officer_id')->references('id')->on('saleofficers')->onDelete('cascade');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
 

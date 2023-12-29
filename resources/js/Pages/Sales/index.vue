@@ -1,5 +1,5 @@
 <template>
-    <MainLayout title="Order Management">
+    <MainLayout title="Sale Management">
 
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
             <v-data-table :headers="headers" :items="data.data" :sort-by="[{ key: 'name', order: 'asc' }]"

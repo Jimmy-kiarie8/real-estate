@@ -2,17 +2,17 @@
     {
         "label": "Sale No",
         "value": null,
-        "model": "target",
-        "type": "date",
+        "model": "order_no",
+        "type": "text",
         "display": true,
         "table_display": true,
         "items": []
     },
     {
         "label": "Plot No.",
-        "value": "",
+        "value": null,
         "model": "plot_id",
-        "type": "text",
+        "type": "select",
         "display": true,
         "table_display": true,
         "items": []

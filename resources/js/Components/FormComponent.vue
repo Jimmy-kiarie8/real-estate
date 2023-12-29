@@ -26,7 +26,7 @@ const dialog = ref(false);
           <v-radio v-for="(option, index) in item.items" :key="index" :label="option" :value="option"></v-radio>
         </v-radio-group>
 
-        <v-select clearable chips :label="item.label" v-if="item.type == 'select'" :items="item.items" variant="outlined" item-title="label" item-value="value" v-model="item.value" :multiple="item.multiple" return-object></v-select>
+        <v-select clearable chips :label="item.label" v-if="item.type == 'select'" :items="item.items" variant="outlined" item-title="label" item-value="value" v-model="item.value" :multiple="item.multiple" :return-object="item.multiple"></v-select>
 
       </div>
     </v-col>

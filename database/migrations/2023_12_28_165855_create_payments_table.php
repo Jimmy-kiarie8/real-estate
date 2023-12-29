@@ -19,7 +19,9 @@ return new class extends Migration
             $table->decimal('amount_paid')->nullable();
             $table->unsignedBigInteger('sale_id')->nullable();
             $table->unsignedBigInteger('client_id')->nullable();
+            $table->unsignedBigInteger('invoice_id')->nullable();
 
+            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->softDeletes();
