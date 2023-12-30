@@ -16,9 +16,16 @@ class UserSeeder extends Seeder
      public function run()
      {
          $faker = Faker::create();
+         User::create([
+            'name' => 'Jimmy',
+            'email' => 'jimlaravel@gmail.com',
+            'phone' => $faker->phoneNumber,
+            'password' => Hash::make('password')
+        ]);
+
 
          // Generate multiple fake agent records
-         for ($i = 0; $i < 10; $i++) {
+         for ($i = 0; $i < 3; $i++) {
              User::create([
                  'name' => $faker->name,
                  'email' => $faker->unique()->safeEmail,

@@ -4,7 +4,7 @@
         "value": null,
         "model": "order_no",
         "type": "text",
-        "display": true,
+        "display": false,
         "table_display": true,
         "items": []
     },
@@ -27,10 +27,28 @@
         "items": []
     },
     {
+        "label": "Status",
+        "value": null,
+        "model": "status",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": ["Pending", "Complete", "Cancelled", "Partially Paid"]
+    },
+    {
         "label": "Client",
         "value": null,
         "model": "client_id",
         "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Amount",
+        "value": null,
+        "model": "amount",
+        "type": "text",
         "display": true,
         "table_display": true,
         "items": []

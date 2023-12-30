@@ -88,8 +88,6 @@ class PlotController extends Controller
 
             $dataValue[$model] = $value;
         }
-        $dataValue['project_id'] = $dataValue['project_id']['id'];
-        // return $dataValue;
         Plot::create($dataValue);
 
         return redirect()->back()->with('message', 'Contact created');

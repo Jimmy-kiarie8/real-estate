@@ -10,6 +10,8 @@ class Payment extends Model
 {
     use HasFactory;
 
+    protected $fillabele = ["payment_date", "payment_mode", "item", "amount_paid", "payment_code", "sale_id", "client_id", "invoice_id"];
+
     public function client()
     {
         return $this->belongsTo(Client::class);

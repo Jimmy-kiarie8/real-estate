@@ -6,6 +6,7 @@ use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 use App\Models\Client;
 use App\Models\Payment;
+use App\Models\Sale;
 use Inertia\Inertia;
 
 class PaymentController extends Controller
@@ -18,6 +19,7 @@ class PaymentController extends Controller
 
         $invoice = Payment::paginate(100);
         $clients = Client::select('id','name')->take(100)->get();
+        $sales = Sale::select('id','order_no')->take(100)->get();
 
         $jsonFile = public_path('data/payment.json'); // Get the full path to the JSON file
 
@@ -33,6 +35,13 @@ class PaymentController extends Controller
                     foreach ($jsonData[$key]['items'] as &$client) {
                         $client['value'] = $client['id'];
                         $client['label'] = $client['name'];
+                    }
+                } elseif ($item['type'] == 'select' && $item['model'] == 'sale_id') {
+                    $jsonData[$key]['items'] = $sales;
+
+                    foreach ($jsonData[$key]['items'] as &$sale) {
+                        $sale['value'] = $sale['id'];
+                        $sale['label'] = $sale['order_no'];
                     }
                 }
             }
@@ -76,7 +85,22 @@ class PaymentController extends Controller
      */
     public function store(StorePaymentRequest $request)
     {
-        //
+        $data = $request->all();
+        $dataValue = [];
+
+        foreach ($data as $item) {
+            $model = $item['model'];
+            if ($item['type']  == 'radio') {
+                $value = ($item['value'] == 'Yes') ? true : false;
+            } else {
+                $value = $item['value'];
+            }
+
+            $dataValue[$model] = $value;
+        }
+        Payment::create($dataValue);
+
+        return redirect()->back()->with('message', 'Contact created');
     }
 
     /**

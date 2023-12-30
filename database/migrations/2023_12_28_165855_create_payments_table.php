@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('payment_mode')->nullable();
             $table->string('item')->nullable();
             $table->decimal('amount_paid')->nullable();
+            $table->string('payment_code')->nullable();
             $table->unsignedBigInteger('sale_id')->nullable();
             $table->unsignedBigInteger('client_id')->nullable();
             $table->unsignedBigInteger('invoice_id')->nullable();
