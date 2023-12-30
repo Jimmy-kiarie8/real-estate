@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePaymentRequest;
 use App\Models\Client;
 use App\Models\Payment;
 use App\Models\Sale;
+use App\Services\DataTransformService;
 use Inertia\Inertia;
 
 class PaymentController extends Controller
@@ -17,39 +18,13 @@ class PaymentController extends Controller
     public function index()
     {
 
-        $invoice = Payment::paginate(100);
-        $clients = Client::select('id','name')->take(100)->get();
-        $sales = Sale::select('id','order_no')->take(100)->get();
+        $payments = Payment::paginate(100);
+
 
         $jsonFile = public_path('data/payment.json'); // Get the full path to the JSON file
 
-        if (file_exists($jsonFile)) {
-            $jsonContents = file_get_contents($jsonFile);
-            $jsonData = json_decode($jsonContents, true);
-
-
-            foreach ($jsonData as $key => $item) {
-                if ($item['type'] == 'select' && $item['model'] == 'client_id') {
-                    $jsonData[$key]['items'] = $clients;
-
-                    foreach ($jsonData[$key]['items'] as &$client) {
-                        $client['value'] = $client['id'];
-                        $client['label'] = $client['name'];
-                    }
-                } elseif ($item['type'] == 'select' && $item['model'] == 'sale_id') {
-                    $jsonData[$key]['items'] = $sales;
-
-                    foreach ($jsonData[$key]['items'] as &$sale) {
-                        $sale['value'] = $sale['id'];
-                        $sale['label'] = $sale['order_no'];
-                    }
-                }
-            }
-        } else {
-            return response('JSON file not found', 404);
-        }
-
-        // return $jsonData;
+        $trans = new DataTransformService;
+        $jsonData = $trans->data_transform($jsonFile);
 
         $headers = [];
         $headers[] = ['title' => 'Created At', 'key' => 'created_at'];
@@ -63,8 +38,8 @@ class PaymentController extends Controller
 
         $headers[] = ['title' => 'Actions', 'key' => 'actions'];
 
-        return Inertia::render('Invoice/index', [
-            'data' => $invoice,
+        return Inertia::render('Orders/Payments/index', [
+            'data' => $payments,
             'form_data' => $jsonData,
             'headers' => $headers,
             'title' => 'Payments',

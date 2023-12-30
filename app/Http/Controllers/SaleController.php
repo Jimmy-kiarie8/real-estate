@@ -80,12 +80,15 @@ class SaleController extends Controller
 
         $headers[] = ['title' => 'Actions', 'key' => 'actions'];
 
-        return Inertia::render('Sales/index', [
+        return Inertia::render('Orders/Sales/index', [
             'data' => $sales,
             'form_data' => $jsonData,
             'headers' => $headers,
             'title' => 'Sales',
             'modelRoute' => 'sales',
+
+            'payment_data' => $paymentData,
+            'payment_route' => 'payment',
         ]);
     }
 
