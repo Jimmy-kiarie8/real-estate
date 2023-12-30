@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateSaleofficerRequest;
 use App\Models\Category;
 use App\Models\Client;
 use App\Models\Saleofficer;
+use App\Services\DataTransformService;
 use Inertia\Inertia;
 
 class SaleofficerController extends Controller
@@ -17,18 +18,11 @@ class SaleofficerController extends Controller
     public function index()
     {
         $saleofficers = Saleofficer::paginate(100);
-        $clients = Category::select('id','name')->take(100)->get();
 
         $jsonFile = public_path('data/sale-officer.json'); // Get the full path to the JSON file
 
-        if (file_exists($jsonFile)) {
-            $jsonContents = file_get_contents($jsonFile);
-            $jsonData = json_decode($jsonContents, true);
-
-
-        } else {
-            return response('JSON file not found', 404);
-        }
+        $trans = new DataTransformService;
+        $jsonData = $trans->data_transform($jsonFile);
 
         $headers = [];
         $headers[] = ['title' => 'Created At', 'key' => 'created_at'];

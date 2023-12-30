@@ -6,6 +6,7 @@ use App\Http\Requests\StorePlotRequest;
 use App\Http\Requests\UpdatePlotRequest;
 use App\Models\Plot;
 use App\Models\Project;
+use App\Services\DataTransformService;
 use Inertia\Inertia;
 
 class PlotController extends Controller
@@ -17,27 +18,11 @@ class PlotController extends Controller
     {
 
         $plots = Plot::paginate();
-        $projects = Project::select('id', 'name')->take(100)->get();
 
         $jsonFile = public_path('data/plots.json'); // Get the full path to the JSON file
 
-        if (file_exists($jsonFile)) {
-            $jsonContents = file_get_contents($jsonFile);
-            $jsonData = json_decode($jsonContents, true);
-
-            foreach ($jsonData as $key => $item) {
-                if ($item['type'] == 'select' && $item['model'] == 'project_id') {
-                    $jsonData[$key]['items'] = $projects;
-
-                    foreach ($jsonData[$key]['items'] as &$plot) {
-                        $plot['value'] = $plot['id'];
-                        $plot['label'] = $plot['name'];
-                    }
-                }
-            }
-        } else {
-            return response('JSON file not found', 404);
-        }
+        $trans = new DataTransformService;
+        $jsonData = $trans->data_transform($jsonFile);
 
         // return $jsonData;
 

@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\DB;
 class DataTransformService
 {
 
-    public function data_transform($jsonFile) {
+    public function data_transform($jsonFile)
+    {
 
         if (file_exists($jsonFile)) {
             $jsonContents = file_get_contents($jsonFile);
@@ -120,4 +121,19 @@ class DataTransformService
         return $jsonData;
     }
 
+    public function store($data)
+    {
+        $dataValue = [];
+        foreach ($data as $item) {
+            $model = $item['model'];
+            if ($item['type']  == 'radio') {
+                $value = ($item['value'] == 'Yes') ? true : false;
+            } else {
+                $value = $item['value'];
+            }
+
+            $dataValue[$model] = $value;
+        }
+        return $dataValue;
+    }
 }

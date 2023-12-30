@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\Payment;
 use App\Models\Sale;
 use App\Services\DataTransformService;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class PaymentController extends Controller
@@ -60,18 +61,8 @@ class PaymentController extends Controller
     public function store(StorePaymentRequest $request)
     {
         $data = $request->all();
-        $dataValue = [];
-
-        foreach ($data as $item) {
-            $model = $item['model'];
-            if ($item['type']  == 'radio') {
-                $value = ($item['value'] == 'Yes') ? true : false;
-            } else {
-                $value = $item['value'];
-            }
-
-            $dataValue[$model] = $value;
-        }
+        $trans = new DataTransformService;
+        $dataValue = $trans->store($data);
         Payment::create($dataValue);
 
         return redirect()->back()->with('message', 'Contact created');
@@ -96,16 +87,36 @@ class PaymentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePaymentRequest $request, Payment $payment)
+    public function update(UpdatePaymentRequest $request,  $id)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            $sale = Sale::find($id);
+            $data = $request->all();
+
+            $trans = new DataTransformService;
+            $dataValue = $trans->store($data);
+
+            $dataValue['sale_id'] = $id;
+            $payment = Payment::create($dataValue);
+
+            $sale->paid_amount -= $payment->amount_paid;
+            $sale->save();
+
+            DB::commit();
+            return redirect()->back()->with('message', 'Contact created');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Payment $payment)
+    public function destroy($id)
     {
-        //
+        Payment::find($id)->delete();
     }
 }

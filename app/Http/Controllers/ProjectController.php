@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Services\DataTransformService;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -18,15 +19,8 @@ class ProjectController extends Controller
 
         $jsonFile = public_path('data/projects.json'); // Get the full path to the JSON file
 
-        if (file_exists($jsonFile)) {
-            $jsonContents = file_get_contents($jsonFile);
-            $jsonData = json_decode($jsonContents, true);
-
-            $project_form = $jsonData;
-
-        } else {
-            return response('JSON file not found', 404);
-        }
+        $trans = new DataTransformService;
+        $jsonData = $trans->data_transform($jsonFile);
 
         $headers = [];
         $headers[] = ['title' => 'Created At', 'key' => 'created_at'];
@@ -42,7 +36,7 @@ class ProjectController extends Controller
 
         return Inertia::render('Projects/index', [
             'projects' => $project,
-            'form_data' => $project_form,
+            'form_data' => $jsonData,
             'headers' => $headers,
             'title' => 'Project',
             'modelRoute' => 'projects',

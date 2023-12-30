@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTitledeedRequest;
 use App\Http\Requests\UpdateTitledeedRequest;
 use App\Models\Client;
 use App\Models\Titledeed;
+use App\Services\DataTransformService;
 use Inertia\Inertia;
 
 class TitledeedController extends Controller
@@ -20,25 +21,8 @@ class TitledeedController extends Controller
 
         $jsonFile = public_path('data/title-deed.json'); // Get the full path to the JSON file
 
-        if (file_exists($jsonFile)) {
-            $jsonContents = file_get_contents($jsonFile);
-            $jsonData = json_decode($jsonContents, true);
-
-
-            foreach ($jsonData as $key => $item) {
-                if ($item['type'] == 'select' && $item['model'] == 'client_id') {
-                    $jsonData[$key]['items'] = $clients;
-
-                    foreach ($jsonData[$key]['items'] as &$client) {
-                        $client['value'] = $client['id'];
-                        $client['label'] = $client['name'];
-                    }
-                }
-            }
-        } else {
-            return response('JSON file not found', 404);
-        }
-
+        $trans = new DataTransformService;
+        $jsonData = $trans->data_transform($jsonFile);
         // return $jsonData;
 
         $headers = [];

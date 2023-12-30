@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
+use App\Services\DataTransformService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -16,16 +17,8 @@ class CategoryController extends Controller
 
         $jsonFile = public_path('data/categories.json'); // Get the full path to the JSON file
 
-        if (file_exists($jsonFile)) {
-            $jsonContents = file_get_contents($jsonFile);
-            $jsonData = json_decode($jsonContents, true);
-
-            $project_form = $jsonData;
-
-        } else {
-            return response('JSON file not found', 404);
-        }
-
+        $trans = new DataTransformService;
+        $jsonData = $trans->data_transform($jsonFile);
         $headers = [];
         $headers[] = ['title' => 'Created At', 'key' => 'created_at'];
 
@@ -40,7 +33,7 @@ class CategoryController extends Controller
 
         return Inertia::render('Category/index', [
             'data' => $categories,
-            'form_data' => $project_form,
+            'form_data' => $jsonData,
             'headers' => $headers,
             'title' => 'Category',
             'modelRoute' => 'category',
