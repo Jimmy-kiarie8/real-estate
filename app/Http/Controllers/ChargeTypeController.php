@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreChargeTypeRequest;
 use App\Http\Requests\UpdateChargeTypeRequest;
 use App\Models\ChargeType;
+use App\Services\DataTransformService;
 use Inertia\Inertia;
 
 class ChargeTypeController extends Controller
@@ -18,15 +19,8 @@ class ChargeTypeController extends Controller
 
         $jsonFile = public_path('data/charge.json'); // Get the full path to the JSON file
 
-        if (file_exists($jsonFile)) {
-            $jsonContents = file_get_contents($jsonFile);
-            $jsonData = json_decode($jsonContents, true);
-
-            $charge_form = $jsonData;
-
-        } else {
-            return response('JSON file not found', 404);
-        }
+        $trans = new DataTransformService;
+        $jsonData = $trans->data_transform($jsonFile);
 
         $headers = [];
         $headers[] = ['title' => 'Created At', 'key' => 'created_at'];
@@ -42,7 +36,7 @@ class ChargeTypeController extends Controller
 
         return Inertia::render('Charge/index', [
             'data' => $charge,
-            'form_data' => $charge_form,
+            'form_data' => $jsonData,
             'headers' => $headers,
             'title' => 'Charge Type',
             'modelRoute' => 'charge-type',

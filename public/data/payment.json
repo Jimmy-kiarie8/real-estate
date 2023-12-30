@@ -31,7 +31,7 @@
         "value": null,
         "model": "sale_id",
         "type": "select",
-        "display": true,
+        "display": false,
         "table_display": true,
         "items": []
     },
@@ -40,7 +40,7 @@
         "value": null,
         "model": "item",
         "type": "select",
-        "display": true,
+        "display": false,
         "table_display": true,
         "items": ["Plot", "Charge"]
     }

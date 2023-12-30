@@ -9,6 +9,7 @@ use App\Models\Plot;
 use App\Models\Project;
 use App\Models\Sale;
 use App\Models\Saleofficer;
+use App\Services\DataTransformService;
 use Inertia\Inertia;
 
 class SaleController extends Controller
@@ -19,54 +20,14 @@ class SaleController extends Controller
     public function index()
     {
         $sales = Sale::paginate(100);
-        $clients = Client::select('id','name')->take(100)->get();
-        $plots = Plot::select('id','plot_no')->take(100)->get();
-        $projects = Project::select('id','name')->take(100)->get();
-        $sale_officer = Saleofficer::select('id','name')->take(100)->get();
 
         $jsonFile = public_path('data/sales.json'); // Get the full path to the JSON file
+         $jsonPayment = public_path('data/payment.json'); // Get the full path to the JSON file
 
-        if (file_exists($jsonFile)) {
-            $jsonContents = file_get_contents($jsonFile);
-            $jsonData = json_decode($jsonContents, true);
+        $trans = new DataTransformService;
+        $jsonData = $trans->data_transform($jsonFile);
 
-
-            foreach ($jsonData as $key => $item) {
-                if ($item['type'] == 'select' && $item['model'] == 'client_id') {
-                    $jsonData[$key]['items'] = $clients;
-
-                    foreach ($jsonData[$key]['items'] as &$client) {
-                        $client['value'] = $client['id'];
-                        $client['label'] = $client['name'];
-                    }
-                } elseif ($item['type'] == 'select' && $item['model'] == 'sales_officer_id') {
-                    $jsonData[$key]['items'] = $sale_officer;
-
-                    foreach ($jsonData[$key]['items'] as &$sale) {
-                        $sale['value'] = $sale['id'];
-                        $sale['label'] = $sale['name'];
-                    }
-                } elseif ($item['type'] == 'select' && $item['model'] == 'plot_id') {
-                    $jsonData[$key]['items'] = $plots;
-
-                    foreach ($jsonData[$key]['items'] as &$plot) {
-                        $plot['value'] = $plot['id'];
-                        $plot['label'] = $plot['plot_no'];
-                    }
-                } elseif ($item['type'] == 'select' && $item['model'] == 'project_id') {
-                    $jsonData[$key]['items'] = $projects;
-
-                    foreach ($jsonData[$key]['items'] as &$project) {
-                        $project['value'] = $project['id'];
-                        $project['label'] = $project['name'];
-                    }
-                }
-            }
-        } else {
-            return response('JSON file not found', 404);
-        }
-
-        // return $jsonData;
+        $paymentData = $trans->data_transform($jsonPayment);
 
         $headers = [];
         $headers[] = ['title' => 'Created At', 'key' => 'created_at'];

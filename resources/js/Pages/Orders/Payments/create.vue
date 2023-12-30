@@ -1,17 +1,18 @@
 <template>
      <v-row justify="center">
     <v-dialog persistent v-model="dialog" width="800">
-      <template v-slot:activator="{ props }">
+      <!-- <template v-slot:activator="{ props }">
         <v-btn variant="outlined" color="info" v-bind="props">
             <v-icon>mdi-plus-circle</v-icon>
-            Create {{ title }}
+            Updated {{ form.order_no }} payment
         </v-btn>
-      </template>
+      </template> -->
       <v-divider></v-divider>
       <v-card>
         <v-card-title class="text-h5">
-          Create A {{ title }}
+            Updated {{ form.order_no }} payment
         </v-card-title>
+        <v-divider></v-divider>
         <v-card-text>
             <myForm :form_data="form_data" />
         </v-card-text>
@@ -61,7 +62,11 @@ export default {
         },
         close() {
             this.dialog=false
-        }
+        },
+        show(data) {
+            this.form = data;
+            this.dialog = true
+        },
     },
 }
 </script>

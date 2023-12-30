@@ -22,9 +22,9 @@
                         mdi-delete
                     </v-icon>
 
-                    <v-tooltip v-model="show" location="bottom">
+                    <v-tooltip location="bottom">
                         <template v-slot:activator="{ props }">
-                            <v-btn icon v-bind="props">
+                            <v-btn icon v-bind="props" @click="openPayment(item)">
                                 <v-icon color="info-lighten-1">
                                     mdi-book
                                 </v-icon>
@@ -65,7 +65,7 @@
             </v-data-table>
         </div>
         <clientEdit ref="clientModal" />
-        <myPayment :form_data="payment_data" :title="title" :modelRoute="payment_route" />
+        <myPayment ref="paymentModal"  :form_data="payment_data" :title="title" :modelRoute="payment_route" />
     </MainLayout>
 </template>
 
@@ -100,6 +100,10 @@ export default {
     methods: {
         openEdit(data) {
             this.$refs.clientModal.show(data)
+            // this.$emit('CallEvent', data)
+        },
+        openPayment(data) {
+            this.$refs.paymentModal.show(data)
             // this.$emit('CallEvent', data)
         },
     },

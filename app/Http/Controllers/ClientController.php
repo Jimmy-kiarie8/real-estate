@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateClientRequest;
 use App\Imports\LeadImport;
 use App\Models\Client;
 use App\Models\Lead;
+use App\Services\DataTransformService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
@@ -22,15 +23,9 @@ class ClientController extends Controller
 
         $jsonFile = public_path('data/clients.json'); // Get the full path to the JSON file
 
-        if (file_exists($jsonFile)) {
-            $jsonContents = file_get_contents($jsonFile);
-            $jsonData = json_decode($jsonContents, true);
+        $trans = new DataTransformService;
+        $jsonData = $trans->data_transform($jsonFile);
 
-            $client_form = $jsonData;
-
-        } else {
-            return response('JSON file not found', 404);
-        }
 
         $headers = [];
         $headers[] = ['title' => 'Created At', 'key' => 'created_at'];
@@ -46,7 +41,7 @@ class ClientController extends Controller
 
         return Inertia::render('UserManagement/Clients/index', [
             'data' => $client,
-            'form_data' => $client_form,
+            'form_data' => $jsonData,
             'headers' => $headers,
             'title' => 'Clients',
             'modelRoute' => 'clients',

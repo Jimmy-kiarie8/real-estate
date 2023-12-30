@@ -20,7 +20,6 @@ class PaymentController extends Controller
 
         $payments = Payment::paginate(100);
 
-
         $jsonFile = public_path('data/payment.json'); // Get the full path to the JSON file
 
         $trans = new DataTransformService;

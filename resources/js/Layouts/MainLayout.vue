@@ -155,4 +155,9 @@ a {
 }.v-navigation-drawer__content{
     /*background: #049569 ;*/
 }
+
+.v-card {
+    padding: 15px !important;
+    border-radius: 20px 0 20px 20px !important;
+}
 </style>
