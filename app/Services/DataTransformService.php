@@ -35,13 +35,13 @@ class DataTransformService
                     } elseif ($item['model'] == 'sale_id') {
                         $fetchSales = true;
                     } elseif ($item['model'] == 'project_id') {
-                        $fetchSales = true;
+                        $fetchProjects = true;
                     } elseif ($item['model'] == 'sales_officer_id') {
-                        $fetchSales = true;
+                        $fetchsaleOfficers = true;
                     } elseif ($item['model'] == 'plot_id') {
-                        $fetchSales = true;
-                    } elseif ($item['model'] == 'sale_id') {
-                        $fetchSales = true;
+                        $fetchPlots = true;
+                    } elseif ($item['model'] == 'category_id') {
+                        $fetchCategories = true;
                     }
                 }
             }
@@ -83,7 +83,7 @@ class DataTransformService
                         $item['value'] = $item['id'];
                         $item['label'] = $item['order_no'];
                     }
-                } elseif ($fetchCategories && $item['type'] == 'select' && $item['model'] == 'sale_id') {
+                } elseif ($fetchCategories && $item['type'] == 'select' && $item['model'] == 'category_id') {
                     $item['items'] = $categories;
 
                     foreach ($item['items'] as &$item) {
@@ -97,14 +97,14 @@ class DataTransformService
                         $item['value'] = $item['id'];
                         $item['label'] = $item['name'];
                     }
-                } elseif ($fetchProjects && $item['type'] == 'select' && $item['model'] == 'sale_id') {
+                } elseif ($fetchProjects && $item['type'] == 'select' && $item['model'] == 'project_id') {
                     $item['items'] = $projects;
 
                     foreach ($item['items'] as &$item) {
                         $item['value'] = $item['id'];
                         $item['label'] = $item['name'];
                     }
-                } elseif ($fetchPlots && $item['type'] == 'select' && $item['model'] == 'sale_id') {
+                } elseif ($fetchPlots && $item['type'] == 'select' && $item['model'] == 'plot_id') {
                     $item['items'] = $plots;
 
                     foreach ($item['items'] as &$item) {

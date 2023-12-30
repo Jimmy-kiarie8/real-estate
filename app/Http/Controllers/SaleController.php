@@ -19,10 +19,10 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sales = Sale::paginate(100);
+        $sales = Sale::latest()->paginate(100);
 
         $jsonFile = public_path('data/sales.json'); // Get the full path to the JSON file
-         $jsonPayment = public_path('data/payment.json'); // Get the full path to the JSON file
+        $jsonPayment = public_path('data/payment.json'); // Get the full path to the JSON file
 
         $trans = new DataTransformService;
         $jsonData = $trans->data_transform($jsonFile);
@@ -79,7 +79,6 @@ class SaleController extends Controller
 
             $dataValue[$model] = $value;
         }
-        // return $dataValue;
         Sale::create($dataValue);
 
         return redirect()->back()->with('message', 'Sale created');
