@@ -53,7 +53,7 @@ export default {
     methods: {
         submit() {
             console.log(this.form_data);
-                this.$inertia.patc(`/${this.modelRoute}/${this.form.id}`, this.form_data, {
+                this.$inertia.patch(`/${this.modelRoute}/${this.form.id}`, this.form_data, {
                     onError: () => {},
                     onSuccess: () => {
                         console.log('success');

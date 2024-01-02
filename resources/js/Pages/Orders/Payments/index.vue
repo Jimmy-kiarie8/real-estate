@@ -53,7 +53,7 @@
                 </template>
             </v-data-table>
         </div>
-        <clientEdit ref="clientModal" />
+        <myEdit :form_data="form_data" :title="title" ref="clientModal" />
     </MainLayout>
 </template>
 
@@ -63,7 +63,7 @@ import MainLayout from '@/Layouts/MainLayout.vue'; import {
 } from "vuetify/labs/VDataTable";
 
 import myCreate from './create.vue'
-import clientEdit from './edit.vue'
+import myEdit from './edit.vue'
 export default {
     props: {
         data: Object,
@@ -73,7 +73,7 @@ export default {
         title: String
     },
     components: {
-        MainLayout, VDataTable, myCreate, clientEdit
+        MainLayout, VDataTable, myCreate, myEdit
     },
     data() {
         return {

@@ -2,25 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Callcenter;
-use App\Models\Order;
 use App\Models\User;
-use App\Services\DataGeneratorService;
-use App\Traits\CallCenterAnalytics;
-use Illuminate\Http\Request;
+use App\Services\DashboardService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
-    use CallCenterAnalytics;
 
-    protected $dataGeneratorService;
+    protected $dashboard;
 
-    public function __construct(DataGeneratorService $dataGeneratorService)
+    public function __construct(DashboardService $dashboard)
     {
-        $this->dataGeneratorService = $dataGeneratorService;
+        $this->dashboard = $dashboard;
     }
 
 
@@ -43,103 +37,103 @@ class DashboardController extends Controller
 
     public function analytics()
     {
-        $user = User::find(Auth::id());
+        // $user = User::find(Auth::id());
+        $dashboard = $this->dashboard;
 
-
-        $total = $user->getTotalLeads();
+        $total = $dashboard->salesCount();
         $data = [
             [
-                'label' => 'Total Completed',
-                'value' => number_format($user->getTotalCallsCompleted()),
-                'icon' => 'mdi-check',
+                'label' => 'Total Clients',
+                'value' => number_format($dashboard->clientCount()),
+                'icon' => 'mdi-account',
                 'iconColor' => 'success',
             ],
             [
-                'label' => 'Total Missed Calls',
-                'value' => number_format($user->getTotalCallsMissed()),
-                'icon' => 'mdi-phone-missed',
+                'label' => 'Total Sales',
+                'value' => number_format($dashboard->salesCount()),
+                'icon' => 'mdi-cart',
                 'iconColor' => 'error',
             ],
             [
-                'label' => 'Total Leads Contacted',
-                'value' => number_format($user->getTotalLeadsContacted()),
-                'icon' => 'mdi-phone-in-talk',
+                'label' => 'Total Title Deeds',
+                'value' => number_format($dashboard->deedCount()),
+                'icon' => 'mdi-book',
                 'iconColor' => 'primary',
             ],
             [
-                'label' => 'Total Leads Converted',
-                'value' => number_format($user->getTotalLeadsConverted()),
+                'label' => 'Total Plots',
+                'value' => number_format($dashboard->plotCount()),
                 'icon' => 'mdi-check-circle',
                 'iconColor' => 'success',
             ],
             [
-                'label' => 'Total System Calls Completed',
-                'value' => number_format($this->getTotalSystemCallsCompleted()),
+                'label' => 'Total Projects',
+                'value' => number_format($dashboard->projectCount()),
                 'icon' => 'mdi-check',
                 'iconColor' => 'success',
             ],
             [
-                'label' => 'Total System Calls Missed',
-                'value' => number_format($this->getTotalSystemCallsMissed()),
+                'label' => 'Total Payments',
+                'value' => number_format($dashboard->paymentCount()),
                 'icon' => 'mdi-close',
                 'iconColor' => 'error',
             ],
             [
-                'label' => 'Total System Leads Contacted',
-                'value' => number_format($this->getTotalSystemLeadsContacted()),
+                'label' => 'Total Invoices',
+                'value' => number_format($dashboard->invoiceCount()),
                 'icon' => 'mdi-phone-in-talk',
                 'iconColor' => 'primary',
             ],
-            [
-                'label' => 'Total System Leads Converted',
-                'value' => number_format($this->getTotalSystemLeadsConverted()),
-                'icon' => 'mdi-check-circle',
-                'iconColor' => 'success',
-            ],
-            [
-                'label' => 'First Call Resolution Rate',
-                'value' => number_format($user->getFirstCallResolutionRate()),
-                'icon' => 'mdi-check-circle',
-                'iconColor' => 'success',
-            ],
-            [
-                'label' => 'Average Call Time',
-                'value' => number_format($user->getAverageCallTime()),
-                'icon' => 'mdi-timer',
-                'iconColor' => 'info',
-            ],
-            [
-                'label' => 'Total Amount Spent',
-                'value' => number_format($user->getTotalAmountSent()),
-                'icon' => 'mdi-currency-usd',
-                'iconColor' => 'warning',
-            ],
-            [
-                'label' => 'Call Abandonment Rate',
-                'value' => number_format($user->getCallAbandonmentRate()),
-                'icon' => 'mdi-alert-circle',
-                'iconColor' => 'error',
-            ],
+            // [
+            //     'label' => 'Total System Leads Converted',
+            //     'value' => number_format($dashboard->getSaleAnalysis()),
+            //     'icon' => 'mdi-check-circle',
+            //     'iconColor' => 'success',
+            // ],
+            // [
+            //     'label' => 'First Call Resolution Rate',
+            //     'value' => number_format($dashboard->getFirstCallResolutionRate()),
+            //     'icon' => 'mdi-check-circle',
+            //     'iconColor' => 'success',
+            // ],
+            // [
+            //     'label' => 'Average Call Time',
+            //     'value' => number_format($dashboard->getAverageCallTime()),
+            //     'icon' => 'mdi-timer',
+            //     'iconColor' => 'info',
+            // ],
+            // [
+            //     'label' => 'Total Amount Spent',
+            //     'value' => number_format($dashboard->getTotalAmountSent()),
+            //     'icon' => 'mdi-currency-usd',
+            //     'iconColor' => 'warning',
+            // ],
+            // [
+            //     'label' => 'Call Abandonment Rate',
+            //     'value' => number_format($dashboard->getCallAbandonmentRate()),
+            //     'icon' => 'mdi-alert-circle',
+            //     'iconColor' => 'error',
+            // ],
         ];
 
-        $leadsChart = $this->dataGeneratorService->generateLeadData();
-        $LeadData = $this->dataGeneratorService->generateLeadData();
-        $AgentActivityData = $this->dataGeneratorService->generateAgentActivityData();
-        $LeadsConversionData = $this->dataGeneratorService->generateLeadsConversionData();
-        $LeadStatusDistributionData = $this->dataGeneratorService->generateLeadStatusDistributionData();
-        $SystemCallsTrendData = $this->dataGeneratorService->generateSystemCallsTrendData();
-        $AgentPerformanceData = $this->dataGeneratorService->generateAgentPerformanceData();
+        $salesChart = $dashboard->getSaleAnalysis();
+        $clientData = $dashboard->getClientAnalysis();
+        // $AgentActivityData = $dashboard->generateAgentActivityData();
+        // $LeadsConversionData = $dashboard->generateLeadsConversionData();
+        // $LeadStatusDistributionData = $dashboard->generateLeadStatusDistributionData();
+        // $SystemCallsTrendData = $dashboard->generateSystemCallsTrendData();
+        // $AgentPerformanceData = $dashboard->generateAgentPerformanceData();
 
         return Inertia::render('Dashboard/index', [
             'data' => $data,
             'total' => $total,
-            'leadsChart' => $leadsChart,
-            'LeadData' => $LeadData,
-            'AgentActivityData' => $AgentActivityData,
-            'LeadsConversionData' => $LeadsConversionData,
-            'LeadStatusDistributionData' => $LeadStatusDistributionData,
-            'SystemCallsTrendData' => $SystemCallsTrendData,
-            'AgentPerformanceData' => $AgentPerformanceData,
+            'salesChart' => $salesChart,
+            'clientData' => $clientData,
+            // 'AgentActivityData' => $AgentActivityData,
+            // 'LeadsConversionData' => $LeadsConversionData,
+            // 'LeadStatusDistributionData' => $LeadStatusDistributionData,
+            // 'SystemCallsTrendData' => $SystemCallsTrendData,
+            // 'AgentPerformanceData' => $AgentPerformanceData,
         ]);
     }
 }

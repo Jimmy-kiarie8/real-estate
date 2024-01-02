@@ -4,31 +4,14 @@
 
       <v-divider></v-divider>
       <v-card>
-        <v-card-title class="text-h5">
-          Edit Contact
+        <v-card-title class="text-h5 text-center">
+          Edit {{title}}
         </v-card-title>
+      <v-divider></v-divider>
+      <br />
         <v-card-text>
             <v-row>
-                <v-col cols="12" md="6">
-                    <div>
-                        <v-text-field clearable label="Name" variant="outlined" v-model="form.name"></v-text-field>
-                    </div>
-                </v-col>
-                <v-col cols="12" md="6">
-                    <div>
-                        <v-text-field clearable label="Email" variant="outlined" v-model="form.email"></v-text-field>
-                    </div>
-                </v-col>
-                <v-col cols="12" md="6">
-                    <div>
-                        <v-text-field clearable label="Phone" variant="outlined" v-model="form.phone"></v-text-field>
-                    </div>
-                </v-col>
-                <v-col cols="12" md="6">
-                    <div>
-                        <v-text-field clearable label="Address" variant="outlined" v-model="form.address"></v-text-field>
-                    </div>
-                </v-col>
+                <myForm :form_data="form_data" />
             </v-row>
 
         </v-card-text>
@@ -37,7 +20,8 @@
             Close
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn variant="outlined" color="primary" @click="submit">
+        <v-btn variant="outlined" color="info" @click="submit" :loading="loading">
+            <v-icon>mdi-plus-circle</v-icon>
             Submit
         </v-btn>
         </v-card-actions>
@@ -50,12 +34,14 @@ import myForm from '@/Components/FormComponent.vue';
 export default {
     props: {
         form_data: Object,
+        title: String
     },
     components: {
         myForm,
     },
     data () {
     return {
+        loading: false,
         dialog: false,
         form: {}
     }
