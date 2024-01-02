@@ -9,10 +9,28 @@
         "items": []
     },
     {
-        "label": "Unit number",
-        "value": "",
-        "model": "unit_number",
-        "type": "text",
+        "label": "Sale Officer",
+        "value": null,
+        "model": "sales_officer_id",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Invoice Type",
+        "value": null,
+        "model": "charge_id",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Sale",
+        "value": null,
+        "model": "sale_id",
+        "type": "select",
         "display": true,
         "table_display": true,
         "items": []
@@ -27,20 +45,20 @@
         "items": []
     },
     {
-        "label": "Installment count",
+        "label": "Amount paid",
         "value": "",
-        "model": "installment_count",
+        "model": "amount_paid",
         "type": "text",
         "display": true,
         "table_display": true,
         "items": []
     },
     {
-        "label": "Sale Officer",
-        "value": null,
-        "model": "sales_officer_id",
-        "type": "select",
-        "display": true,
+        "label": "Paid",
+        "value": "",
+        "model": "paid",
+        "type": "text",
+        "display": false,
         "table_display": true,
         "items": []
     }

@@ -60,7 +60,7 @@ const links = [
     },
     {
         text: 'Invoices',
-        link: '/payment',
+        link: '/invoices',
         icon: 'mdi-book',
         hasSub: false,
         subMenu: []

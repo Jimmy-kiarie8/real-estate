@@ -39,7 +39,7 @@ Route::resource('projects', ProjectController::class);
 Route::resource('category', CategoryController::class);
 Route::resource('saleofficers', SaleofficerController::class);
 Route::resource('charge-type', ChargeTypeController::class);
-Route::resource('invoice', InvoiceController::class);
+Route::resource('invoices', InvoiceController::class);
 Route::resource('title-deed', TitledeedController::class);
 Route::resource('payment', PaymentController::class);
 Route::resource('sales', SaleController::class);

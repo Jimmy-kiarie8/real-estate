@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Category;
+use App\Models\ChargeType;
 use App\Models\Client;
 use App\Models\Plot;
 use App\Models\Project;
@@ -27,6 +28,7 @@ class DataTransformService
             $fetchsaleOfficers = false;
             $fetchProjects = false;
             $fetchPlots = false;
+            $fetchCharge = false;
 
             // Check if client_id or sale_id is present in the JSON data
             foreach ($jsonData as $item) {
@@ -43,6 +45,8 @@ class DataTransformService
                         $fetchPlots = true;
                     } elseif ($item['model'] == 'category_id') {
                         $fetchCategories = true;
+                    } elseif ($item['model'] == 'charge_id') {
+                        $fetchCharge = true;
                     }
                 }
             }
@@ -65,6 +69,9 @@ class DataTransformService
             }
             if ($fetchPlots) {
                 $plots = Plot::select('id', 'plot_no')->take(100)->get();
+            }
+            if ($fetchCharge) {
+                $charges = ChargeType::select('id', 'type')->take(100)->get();
             }
 
 
@@ -111,6 +118,13 @@ class DataTransformService
                     foreach ($item['items'] as &$item) {
                         $item['value'] = $item['id'];
                         $item['label'] = $item['plot_no'];
+                    }
+                } elseif ($fetchCharge && $item['type'] == 'select' && $item['model'] == 'charge_id') {
+                    $item['items'] = $charges;
+
+                    foreach ($item['items'] as &$item) {
+                        $item['value'] = $item['id'];
+                        $item['label'] = $item['type'];
                     }
                 }
             }

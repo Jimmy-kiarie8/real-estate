@@ -41,7 +41,7 @@ class InvoiceController extends Controller
             'data' => $invoice,
             'form_data' => $jsonData,
             'headers' => $headers,
-            'title' => 'Invoice',
+            'title' => 'Invoices',
             'modelRoute' => 'invoice',
         ]);
     }
