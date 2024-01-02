@@ -42,12 +42,12 @@
     </template>
         <v-col cols="12" sm="6"  style="padding: 3px;">
         <v-card class="mx-auto">
-            <barChart :chartData="LeadsConversionData" />
+            <barChart :chartData="salesChart" />
             </v-card>
         </v-col>
         <v-col cols="12" sm="6"  style="padding: 3px;">
         <v-card class="mx-auto">
-            <barChart :chartData="AgentPerformanceData" />
+            <barChart :chartData="clientData" />
             </v-card>
         </v-col>
 
@@ -97,17 +97,17 @@
 
     <v-col cols="12" sm="4"  style="padding: 3px;">
         <v-card class="mx-auto">
-            <doughnutChart :chartData="LeadStatusDistributionData" />
+            <doughnutChart :chartData="clientData" />
             </v-card>
         </v-col>
         <v-col cols="12" sm="4"  style="padding: 3px;">
         <v-card class="mx-auto">
-            <lineChart :chartData="AgentActivityData" />
+            <lineChart :chartData="projectAnalysis" />
             </v-card>
         </v-col>
         <v-col cols="12" sm="4"  style="padding: 3px;">
         <v-card class="mx-auto">
-            <lineChart :chartData="SystemCallsTrendData" />
+            <lineChart :chartData="paymentAnalysis" />
             </v-card>
         </v-col>
     </v-row>
@@ -168,13 +168,10 @@ export default {
     props: {
         total: Number,
         data: Object,
-        leadsChart: Object,
-        LeadData: Object,
-        AgentActivityData: Object,
-        LeadsConversionData: Object,
-        LeadStatusDistributionData: Object,
-        SystemCallsTrendData: Object,
-        AgentPerformanceData: Object,
+        salesChart: Object,
+        clientData: Object,
+        projectAnalysis:  Object,
+        paymentAnalysis:  Object,
     },
     components: {
         MainLayout, doughnutChart, lineChart, barChart

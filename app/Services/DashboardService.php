@@ -104,4 +104,56 @@ class DashboardService
 
         return $clients;
     }
+    public function projectAnalysis()
+    {
+        // Logic to generate data for graphical analysis (e.g., sales trends, client demographics)
+        $data = Project::select(
+            DB::raw('DATE_FORMAT(created_at, "%b") as month'),
+            DB::raw('COUNT(*) as count')
+        )
+            ->groupBy('month')
+            ->orderBy('month', 'Desc')
+            ->get();
+
+        $labels = $data->pluck('month')->toArray();
+        $counts = $data->pluck('count')->toArray();
+
+        $clients = [
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'data' => $counts,
+                    'backgroundColor' => ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED'],
+                ],
+            ],
+        ];
+
+        return $clients;
+    }
+    public function paymentAnalysis()
+    {
+        // Logic to generate data for graphical analysis (e.g., sales trends, client demographics)
+        $data = Payment::select(
+            DB::raw('DATE_FORMAT(created_at, "%b") as month'),
+            DB::raw('COUNT(*) as count')
+        )
+            ->groupBy('month')
+            ->orderBy('month', 'Desc')
+            ->get();
+
+        $labels = $data->pluck('month')->toArray();
+        $counts = $data->pluck('count')->toArray();
+
+        $clients = [
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'data' => $counts,
+                    'backgroundColor' => ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED'],
+                ],
+            ],
+        ];
+
+        return $clients;
+    }
 }

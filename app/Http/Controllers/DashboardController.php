@@ -84,12 +84,12 @@ class DashboardController extends Controller
                 'icon' => 'mdi-phone-in-talk',
                 'iconColor' => 'primary',
             ],
-            // [
-            //     'label' => 'Total System Leads Converted',
-            //     'value' => number_format($dashboard->getSaleAnalysis()),
-            //     'icon' => 'mdi-check-circle',
-            //     'iconColor' => 'success',
-            // ],
+            [
+                'label' => 'Total Projects',
+                'value' => number_format($dashboard->projectCount()),
+                'icon' => 'mdi-check-circle',
+                'iconColor' => 'success',
+            ],
             // [
             //     'label' => 'First Call Resolution Rate',
             //     'value' => number_format($dashboard->getFirstCallResolutionRate()),
@@ -118,8 +118,8 @@ class DashboardController extends Controller
 
         $salesChart = $dashboard->getSaleAnalysis();
         $clientData = $dashboard->getClientAnalysis();
-        // $AgentActivityData = $dashboard->generateAgentActivityData();
-        // $LeadsConversionData = $dashboard->generateLeadsConversionData();
+        $projectAnalysis = $dashboard->projectAnalysis();
+        $paymentAnalysis = $dashboard->paymentAnalysis();
         // $LeadStatusDistributionData = $dashboard->generateLeadStatusDistributionData();
         // $SystemCallsTrendData = $dashboard->generateSystemCallsTrendData();
         // $AgentPerformanceData = $dashboard->generateAgentPerformanceData();
@@ -129,8 +129,8 @@ class DashboardController extends Controller
             'total' => $total,
             'salesChart' => $salesChart,
             'clientData' => $clientData,
-            // 'AgentActivityData' => $AgentActivityData,
-            // 'LeadsConversionData' => $LeadsConversionData,
+            'projectAnalysis' => $projectAnalysis,
+            'paymentAnalysis' => $paymentAnalysis,
             // 'LeadStatusDistributionData' => $LeadStatusDistributionData,
             // 'SystemCallsTrendData' => $SystemCallsTrendData,
             // 'AgentPerformanceData' => $AgentPerformanceData,
