@@ -34,7 +34,7 @@
         <div>
             <v-card title=""  max-width="500" style="margin: auto;    margin-top: 200px;">
             <v-card-title primary-title>
-                <img src="https://logixsaas.com/wp-content/uploads/2023/08/Logixsaas-Consultancy-Limited-Logo_Approved-02-1.png" />
+                <img src="https://www.motorlabauto.com/wp-content/uploads/2021/07/motorlabauto-logo.png" />
             </v-card-title>
                 <v-card-text>
                     <v-text-field v-model="form.email" variant="outlined" autocomplete="username" label="Email"></v-text-field>
