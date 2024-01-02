@@ -21,7 +21,7 @@ class Client extends Model
         'id_number',
         'pin',
         'nok_details',
-        'category_id'
+        'category'
     ];
 
     public function getCreatedAtAttribute($value)

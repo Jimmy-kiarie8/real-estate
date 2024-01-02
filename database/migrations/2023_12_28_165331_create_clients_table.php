@@ -20,10 +20,7 @@ return new class extends Migration
             $table->string('pin')->nullable();
             $table->string('nok_details')->nullable();
             $table->string('address')->nullable();
-
-            $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-
+            $table->string('category')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

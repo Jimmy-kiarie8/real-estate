@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Plot;
 use App\Models\Project;
 use App\Services\DataTransformService;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -69,9 +71,22 @@ class ProjectController extends Controller
 
             $dataValue[$model] = $value;
         }
-        Project::create($dataValue);
 
-        return redirect()->back()->with('message', 'Project created');
+        DB::beginTransaction();
+        try {
+            $project = Project::create($dataValue);
+            for ($i = 0; $i < $dataValue['total_units']; $i++) {
+                $plot = new Plot();
+                $plot->project_id = $project->id;
+                $plot->plot_no = make_reference_id($project->reference, ($i + 1));
+                $plot->save();
+            }
+            DB::commit();
+            return redirect()->back()->with('message', 'Project created');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**

@@ -1,5 +1,23 @@
 [
     {
+        "label": "Project",
+        "value": null,
+        "model": "project_id",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
+        "label": "Date",
+        "value": null,
+        "model": "date",
+        "type": "date",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
         "label": "Sale No",
         "value": null,
         "model": "order_no",
@@ -49,15 +67,6 @@
         "value": null,
         "model": "amount",
         "type": "text",
-        "display": true,
-        "table_display": true,
-        "items": []
-    },
-    {
-        "label": "Project",
-        "value": null,
-        "model": "project_id",
-        "type": "select",
         "display": true,
         "table_display": true,
         "items": []

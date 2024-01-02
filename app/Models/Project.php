@@ -11,6 +11,7 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
+        'reference',
         'name',
         'total_units',
         'location',

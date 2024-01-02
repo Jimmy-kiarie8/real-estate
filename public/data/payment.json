@@ -36,6 +36,15 @@
         "items": []
     },
     {
+        "label": "Charge type",
+        "value": null,
+        "model": "sale_id",
+        "type": "select",
+        "display": false,
+        "table_display": true,
+        "items": []
+    },
+    {
         "label": "Item paid for",
         "value": null,
         "model": "item",

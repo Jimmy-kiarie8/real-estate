@@ -17,28 +17,28 @@ const links = [
         subMenu: []
     },
     {
-        text: 'Projects',
-        link: '/projects',
-        icon: 'mdi-projector-screen',
-        hasSub: false,
-        subMenu: []
-    },
-    {
-        text: 'Category',
-        link: '/category',
-        icon: 'mdi-shape-plus',
-        hasSub: false,
-        subMenu: []
-    },
-    {
-        text: 'Client',
+        text: 'Clients',
         link: '/clients',
         icon: 'mdi-badge-account-alert-outline',
         hasSub: false,
         subMenu: []
     },
     {
-        text: 'Plot',
+        text: 'Projects',
+        link: '/projects',
+        icon: 'mdi-projector-screen',
+        hasSub: false,
+        subMenu: []
+    },
+    // {
+    //     text: 'Category',
+    //     link: '/category',
+    //     icon: 'mdi-shape-plus',
+    //     hasSub: false,
+    //     subMenu: []
+    // },
+    {
+        text: 'Plots',
         link: '/plot',
         icon: 'mdi-badge-account-alert-outline',
         hasSub: false,
@@ -52,35 +52,35 @@ const links = [
         subMenu: []
     },
     {
-        text: 'Charge',
+        text: 'Charges',
         link: '/charge-type',
         icon: 'mdi-cash-100',
         hasSub: false,
         subMenu: []
     },
     {
-        text: 'Invoice',
+        text: 'Invoices',
         link: '/payment',
         icon: 'mdi-book',
         hasSub: false,
         subMenu: []
     },
     {
-        text: 'Payment',
+        text: 'Payments',
         link: '/payment',
         icon: 'mdi-cash-multiple',
         hasSub: false,
         subMenu: []
     },
     {
-        text: 'Sale',
+        text: 'Sales',
         link: '/sales',
         icon: 'mdi-cart',
         hasSub: false,
         subMenu: []
     },
     {
-        text: 'Title Deed',
+        text: 'Title Deeds',
         link: '/title-deed',
         icon: 'mdi-book-alphabet',
         hasSub: false,

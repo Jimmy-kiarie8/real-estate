@@ -1,5 +1,14 @@
 [
     {
+        "label": "Reference",
+        "value": "",
+        "model": "reference",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
         "label": "Name",
         "value": "",
         "model": "name",

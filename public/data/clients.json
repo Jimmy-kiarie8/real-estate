@@ -27,6 +27,15 @@
         "items": []
     },
     {
+        "label": "Address",
+        "value": "",
+        "model": "address",
+        "type": "text",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
         "label": "Id No.",
         "value": "",
         "model": "id_number",
@@ -45,18 +54,18 @@
         "items": []
     },
     {
+        "label": "Category",
+        "value": null,
+        "model": "category",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": ["Individual", "Group"]
+    },
+    {
         "label": "Nok Details",
         "value": "",
         "model": "nok_details",
-        "type": "text",
-        "display": true,
-        "table_display": true,
-        "items": []
-    },
-    {
-        "label": "Address",
-        "value": "",
-        "model": "address",
         "type": "text",
         "display": true,
         "table_display": true,
