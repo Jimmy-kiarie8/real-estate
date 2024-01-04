@@ -43,7 +43,7 @@ Route::resource('invoices', InvoiceController::class);
 Route::resource('title-deed', TitledeedController::class);
 Route::resource('payment', PaymentController::class);
 Route::resource('sales', SaleController::class);
-Route::resource('plot', PlotController::class);
+Route::resource('plots', PlotController::class);
 
 Route::get('analytics', [DashboardController::class, 'analytics']);
 

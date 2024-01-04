@@ -67,9 +67,9 @@ class DataTransformService
             if ($fetchProjects) {
                 $projects = Project::select('id', 'name')->take(100)->get();
             }
-            if ($fetchPlots) {
-                $plots = Plot::select('id', 'plot_no')->take(100)->get();
-            }
+            // if ($fetchPlots) {
+            //     $plots = Plot::select('id', 'plot_no')->take(100)->get();
+            // }
             if ($fetchCharge) {
                 $charges = ChargeType::select('id', 'type')->take(100)->get();
             }
@@ -112,14 +112,7 @@ class DataTransformService
                         $item['value'] = $item['id'];
                         $item['label'] = $item['name'];
                     }
-                } elseif ($fetchPlots && $item['type'] == 'select' && $item['model'] == 'plot_id') {
-                    $item['items'] = $plots;
-
-                    foreach ($item['items'] as &$item) {
-                        $item['value'] = $item['id'];
-                        $item['label'] = $item['plot_no'];
-                    }
-                } elseif ($fetchCharge && $item['type'] == 'select' && $item['model'] == 'charge_id') {
+                }elseif ($fetchCharge && $item['type'] == 'select' && $item['model'] == 'charge_id') {
                     $item['items'] = $charges;
 
                     foreach ($item['items'] as &$item) {
@@ -127,6 +120,16 @@ class DataTransformService
                         $item['label'] = $item['type'];
                     }
                 }
+
+
+                // elseif ($fetchPlots && $item['type'] == 'select' && $item['model'] == 'plot_id') {
+                //     $item['items'] = $plots;
+
+                //     foreach ($item['items'] as &$item) {
+                //         $item['value'] = $item['id'];
+                //         $item['label'] = $item['plot_no'];
+                //     }
+                // } 
             }
         } else {
             return response('JSON file not found', 404);

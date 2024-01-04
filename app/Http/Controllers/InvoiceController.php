@@ -18,6 +18,7 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoice = Invoice::paginate(100);
+        $clients = Client::paginate(100);
 
         $jsonFile = public_path('data/invoice.json'); // Get the full path to the JSON file
 
@@ -41,6 +42,7 @@ class InvoiceController extends Controller
             'data' => $invoice,
             'form_data' => $jsonData,
             'headers' => $headers,
+            'clients'=> $clients,
             'title' => 'Invoices',
             'modelRoute' => 'invoice',
         ]);

@@ -6,6 +6,16 @@
         "type": "select",
         "display": true,
         "table_display": true,
+        "triggered": true,
+        "items": []
+    },
+    {
+        "label": "Plot No.",
+        "value": null,
+        "model": "plot_id",
+        "type": "select",
+        "display": true,
+        "table_display": true,
         "items": []
     },
     {
@@ -23,15 +33,6 @@
         "model": "order_no",
         "type": "text",
         "display": false,
-        "table_display": true,
-        "items": []
-    },
-    {
-        "label": "Plot No.",
-        "value": null,
-        "model": "plot_id",
-        "type": "select",
-        "display": true,
         "table_display": true,
         "items": []
     },

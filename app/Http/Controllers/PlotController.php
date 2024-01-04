@@ -42,8 +42,8 @@ class PlotController extends Controller
             'data' => $plots,
             'form_data' => $jsonData,
             'headers' => $headers,
-            'title' => 'Plots',
-            'modelRoute' => 'plot',
+            'title' => 'Plot',
+            'modelRoute' => 'plots',
         ]);
     }
 
@@ -81,9 +81,16 @@ class PlotController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Plot $plot)
+    public function show($id)
     {
-        //
+        $plots = Plot::where('project_id', $id)->get();
+
+        $plots->transform(function($plot) {
+            $plot->value = $plot->id;
+            $plot->label = $plot->plot_no;
+            return  $plot;
+        });
+        return  $plots;
     }
 
     /**

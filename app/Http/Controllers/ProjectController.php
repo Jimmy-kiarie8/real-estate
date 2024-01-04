@@ -22,7 +22,7 @@ class ProjectController extends Controller
         $jsonFile = public_path('data/projects.json'); // Get the full path to the JSON file
 
         $trans = new DataTransformService;
-        $jsonData = $trans->data_transform($jsonFile);
+         $jsonData = $trans->data_transform($jsonFile);
 
         $headers = [];
         $headers[] = ['title' => 'Created At', 'key' => 'created_at'];

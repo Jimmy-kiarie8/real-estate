@@ -9,7 +9,11 @@
                         <v-toolbar-title>{{ title }} Management</v-toolbar-title>
                         <v-divider class="mx-4" inset vertical></v-divider>
                         <v-spacer></v-spacer>
-                        <myCreate :form_data="form_data" :title="title" :modelRoute="modelRoute" />
+
+                        <v-btn variant="outlined" color="info" @click="openCreate">
+                            <v-icon>mdi-plus-circle</v-icon>
+                            Create {{ title }}
+                        </v-btn>
                     </v-toolbar>
                     <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
                         hide-details></v-text-field>
@@ -54,6 +58,7 @@
             </v-data-table>
         </div>
         <clientEdit ref="clientModal" />
+        <myCreate :form_data="form_data" :title="title" :modelRoute="modelRoute" :clients="clients"  ref="createModal" />
     </MainLayout>
 </template>
 
@@ -68,6 +73,7 @@ export default {
     props: {
         data: Object,
         form_data: Object,
+        clients: Object,
         headers: Object,
         modelRoute: String,
         title: String
@@ -85,6 +91,10 @@ export default {
     methods: {
         openEdit(data) {
             this.$refs.clientModal.show(data)
+            // this.$emit('CallEvent', data)
+        },
+        openCreate() {
+            this.$refs.createModal.show()
             // this.$emit('CallEvent', data)
         },
     },

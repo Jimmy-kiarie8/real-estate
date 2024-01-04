@@ -9,30 +9,31 @@
         "items": []
     },
     {
-        "label": "Plot Number",
-        "value": "",
-        "model": "plot_number",
-        "type": "text",
+        "label": "Project",
+        "value": null,
+        "model": "project_id",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "triggered": true,
+        "items": []
+    },
+    {
+        "label": "Plot No.",
+        "value": null,
+        "model": "plot_id",
+        "type": "select",
         "display": true,
         "table_display": true,
         "items": []
     },
     {
         "label": "Status",
-        "value": "",
+        "value": null,
         "model": "status",
         "type": "select",
         "display": true,
         "table_display": true,
         "items": [ "Collected", "Uncollected"]
-    },
-    {
-        "label": "Item paid for",
-        "value": null,
-        "model": "client_id",
-        "type": "select",
-        "display": true,
-        "table_display": true,
-        "items": []
     }
 ]

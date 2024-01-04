@@ -1,5 +1,14 @@
 [
     {
+        "label": "Invoice Type",
+        "value": null,
+        "model": "charge_id",
+        "type": "select",
+        "display": true,
+        "table_display": true,
+        "items": []
+    },
+    {
         "label": "Client",
         "value": null,
         "model": "client_id",
@@ -12,15 +21,6 @@
         "label": "Sale Officer",
         "value": null,
         "model": "sales_officer_id",
-        "type": "select",
-        "display": true,
-        "table_display": true,
-        "items": []
-    },
-    {
-        "label": "Invoice Type",
-        "value": null,
-        "model": "charge_id",
         "type": "select",
         "display": true,
         "table_display": true,

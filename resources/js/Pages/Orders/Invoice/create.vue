@@ -1,19 +1,26 @@
 <template>
      <v-row justify="center">
     <v-dialog persistent v-model="dialog" width="800">
-      <template v-slot:activator="{ props }">
+      <!-- <template v-slot:activator="{ props }">
         <v-btn variant="outlined" color="info" v-bind="props">
             <v-icon>mdi-plus-circle</v-icon>
             Create {{ title }}
         </v-btn>
-      </template>
-      <v-divider></v-divider>
+      </template> -->
       <v-card>
         <v-card-title class="text-h5">
           Create A {{ title }}
         </v-card-title>
         <v-card-text>
-            <myForm :form_data="form_data" />
+            <!-- <myForm :form_data="form_data" /> -->
+            <v-select clearable chips label="Invoice Type" :items="types" variant="outlined"  v-model="form.type" @update:modelValue="onProjectChange"></v-select>
+
+            <v-select clearable chips label="Clients" :items="clients.data" item-title="name" item-value="id" variant="outlined"  v-model="form.client_id"></v-select>
+            <v-select clearable chips label="Sale Officer" :items="sale_officers" variant="outlined"  v-model="form.sale_office_id"></v-select>
+            <v-select clearable chips label="Sales" :items="sales" variant="outlined"  v-model="form.sale_office_id"></v-select>
+
+            <v-text-field clearable label="Amount Payable" variant="outlined" v-model="form.amount_payable"></v-text-field>
+            <v-text-field clearable label="Amount Paid" variant="outlined" v-model="form.amount_paid"></v-text-field>
         </v-card-text>
         <v-card-actions>
         <v-btn variant="outlined" color="error" @click="close">
@@ -35,6 +42,7 @@ export default {
     props: {
         form_data: Object,
         modelRoute: String,
+        clients: Object,
         title: String
     },
     components: {
@@ -43,7 +51,10 @@ export default {
     data () {
     return {
         dialog: false,
-        form: {}
+        form: {},
+        sales: [],
+        sale_officers: [],
+        types: ['Interest', 'Plot']
     }
     },
     mounted () {
@@ -59,8 +70,32 @@ export default {
                     }
                 })
         },
+        getSales() {
+            this.$inertia.get(`/sales`, {
+                onError: () => {},
+                onSuccess: () => {
+                    console.log('success');
+                }
+            })
+        },
+        getSaleOfficer() {
+            this.$inertia.get(`/saleofficers`, {
+                onError: () => {},
+                onSuccess: () => {
+                    console.log('success');
+                }
+            })
+
+        },
         close() {
             this.dialog=false
+        },
+
+        show() {
+            this.dialog = true
+        },
+        onProjectChange() {
+
         }
     },
 }
