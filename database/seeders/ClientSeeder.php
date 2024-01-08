@@ -26,7 +26,7 @@ class ClientSeeder extends Seeder
                 'id_number' => $faker->numberBetween(3253622, 4782922),
                 'pin' => $faker->numberBetween(1001, 9999),
                 'nok_details' => $faker->text(),
-                'category_id' => $faker->numberBetween(1, 10),
+                // 'category_id' => $faker->numberBetween(1, 10),
              ]);
          }
     }
