@@ -20,7 +20,7 @@
             Close
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn variant="outlined" color="info" @click="submit">
+        <v-btn variant="outlined" color="info" @click="submit" :loading="loading">
             <v-icon>mdi-plus-circle</v-icon>
             Submit
         </v-btn>
@@ -43,6 +43,7 @@ export default {
     data () {
     return {
         dialog: false,
+        loading: false,
         form: {}
     }
     },
@@ -51,10 +52,14 @@ export default {
     },
     methods: {
         submit() {
+            this.loading = true
             console.log(this.form_data);
                 this.$inertia.post(`/${this.modelRoute}`, this.form_data, {
-                    onError: () => {},
+                    onError: () => {
+                        this.loading = false
+                    },
                     onSuccess: () => {
+                        this.loading = false
                         console.log('success');
                     }
                 })

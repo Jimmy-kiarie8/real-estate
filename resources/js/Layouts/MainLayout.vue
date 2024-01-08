@@ -52,6 +52,12 @@ const links = [
         subMenu: []
     },
     {
+        text: 'Sales Manager',
+        link: '#',
+        icon: 'mdi-bag-checked',
+        subMenu: [
+            
+    {
         text: 'Charges',
         link: '/charge-type',
         icon: 'mdi-cash-100',
@@ -86,19 +92,16 @@ const links = [
         hasSub: false,
         subMenu: []
     },
-    {
-        text: 'Reports',
-        link: '#',
-        icon: 'mdi-bag-checked',
-        subMenu: [
-            {
-                text: 'Report',
-                link: '/reports',
-                icon: 'mdi-basket'
-            }
         ],
         hasSub: true
-    }
+    },
+    {
+        text: 'Reports',
+        link: '/reports',
+        icon: 'mdi-cart',
+        hasSub: false,
+        subMenu: []
+    },
 ]
 </script>
 
@@ -110,7 +113,7 @@ const links = [
         </v-list>
 
         <v-divider></v-divider>
-        <v-list nav color="red" v-for="(link, index) in links" :key="index">
+        <v-list nav color="red" v-for="(link, index) in links" :key="index" id="main-layout">
             <Link :href="link.link"  v-if="!link.hasSub">
                 <v-list-item :prepend-icon="link.icon" class="v-link" :value="link">
                     {{ link.text }}
@@ -121,7 +124,7 @@ const links = [
 
             <v-list-group :value="link.text" v-else>
                 <template v-slot:activator="{ props }">
-                    <v-list-item v-bind="props" prepend-icon="mdi-account-circle" :title="link.text"></v-list-item>
+                    <v-list-item v-bind="props" prepend-icon="mdi-cart" :title="link.text"></v-list-item>
                 </template>
                 <Link :key="i" v-for="(item, i) in link.subMenu" :href="item.link">
                     <v-list-item :title="item.text" :prepend-icon="item.icon" :value="i"></v-list-item>
@@ -132,10 +135,10 @@ const links = [
 
     </v-navigation-drawer>
 
-    <v-app-bar>
+    <v-app-bar color="info">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-app-bar-title>Logixsaas Call Center</v-app-bar-title>
+      <v-app-bar-title>Dream Life Property Ltd</v-app-bar-title>
     </v-app-bar>
 
     <v-main>
@@ -148,11 +151,13 @@ const links = [
 
 
 <style>
-a {
+#main-layout a, 
+#main-layout .v-list-item--nav .v-list-item-title{
   text-decoration: none; /* Add an underline to make it look like a link */
   cursor: pointer; /* Change the cursor to a pointer when hovering */
   color: #fff;
-}.v-navigation-drawer__content{
+}
+.v-navigation-drawer__content, .v-toolbar__content, .v-toolbar__extension{
     background: #049569 ;
 }
 
