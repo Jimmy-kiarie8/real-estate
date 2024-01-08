@@ -50,10 +50,10 @@ Route::get('analytics', [DashboardController::class, 'analytics']);
 Route::get('reports', [ReportController::class, 'index']);
 Route::post('upload', [ClientController::class, 'upload']);
 
-Route::post('generateAgentPerformanceReport', [ReportController::class, 'generateAgentPerformanceReport']);
-Route::post('generateLeadStatusReport', [ReportController::class, 'generateLeadStatusReport']);
-Route::post('generateSystemCallsTrendReport', [ReportController::class, 'generateSystemCallsTrendReport']);
-Route::post('generateLeadsConversionComparisonReport', [ReportController::class, 'generateLeadsConversionComparisonReport']);
+Route::post('projectOverview', [ReportController::class, 'projectOverview']);
+Route::post('plotStatus', [ReportController::class, 'plotStatus']);
+Route::post('salesReport', [ReportController::class, 'salesReport']);
+Route::post('paymentReport', [ReportController::class, 'paymentReport']);
 Route::post('generateFirstCallResolutionRateReport', [ReportController::class, 'generateFirstCallResolutionRateReport']);
 Route::post('generateAverageCallTimeReport', [ReportController::class, 'generateAverageCallTimeReport']);
 Route::post('generateCallAbandonmentRateReport', [ReportController::class, 'generateCallAbandonmentRateReport']);

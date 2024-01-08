@@ -7,7 +7,13 @@
                     <v-select clearable chips label="Report" :items="reports" variant="outlined"  item-title="label" item-value="value" v-model="form.report"></v-select>
                 </v-col>
                 <v-col cols="12" sm="3">
-                    <v-select clearable chips label="Agent" :items="users" variant="outlined" item-title="name" item-value="id" v-model="form.agent_id"></v-select>
+                    <v-select clearable chips label="Agent" :items="sale_officer" variant="outlined" item-title="name" item-value="id" v-model="form.agent_id"></v-select>
+                </v-col>
+                <v-col cols="12" sm="3">
+                    <v-select clearable chips label="Clients" :items="clients" variant="outlined" item-title="name" item-value="id" v-model="form.client_id"></v-select>
+                </v-col>
+                <v-col cols="12" sm="3">
+                    <v-select clearable chips label="Projects" :items="projects" variant="outlined" item-title="name" item-value="id" v-model="form.project_id"></v-select>
                 </v-col>
 
                 <v-col cols="12" sm="3">
@@ -17,7 +23,7 @@
                     <v-text-field clearable v-model="form.end_date" label="End Date" variant="outlined" type="date"></v-text-field>
                 </v-col>
 
-                <v-btn color="info" @click="getReport">Filter</v-btn>
+                <v-btn color="info" @click="getReport">Filer</v-btn>
             </v-row>
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -59,7 +65,9 @@ import {
 import axios from 'axios';
 export default {
         props: {
-            users: Object,
+            sale_officer: Object,
+            clients: Object,
+            projects: Object,
             // headers: Object,
         },
     components: {
@@ -79,16 +87,10 @@ export default {
         data: [],
         headers: [],
         reports: [
-            {label: 'Agent Performance Report', value: 'generateAgentPerformanceReport'},
-            {label: 'Lead Status Report', value: 'generateLeadStatusReport'},
-            {label: 'System Calls Trend Report', value: 'generateSystemCallsTrendReport'},
-            {label: 'Leads Conversion Comparison Report', value: 'generateLeadsConversionComparisonReport'},
-            {label: 'First Call Resolution Rate Report', value: 'generateFirstCallResolutionRateReport'},
-            {label: 'Average Call Time Report', value: 'generateAverageCallTimeReport'},
-            {label: 'Call Abandonment Rate Report', value: 'generateCallAbandonmentRateReport'},
-            {label: 'Agent Activity Over Time Report', value: 'generateAgentActivityOverTimeReport'},
-            {label: 'Total Amount Spent Report', value: 'generateTotalAmountSpentReport'},
-            {label: 'Overall SystemSummary Report', value: 'generateOverallSystemSummaryReport'},
+            {label: 'Project Overview', value: 'projectOverview'},
+            {label: 'Plot Status', value: 'plotStatus'},
+            {label: 'Sales Report', value: 'salesReport'},
+            {label: 'Payment Report', value: 'paymentReport'},
         ]
       }
     },
