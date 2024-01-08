@@ -135,7 +135,7 @@ const links = [
 
     </v-navigation-drawer>
 
-    <v-app-bar color="info">
+    <v-app-bar color="info" id="tool-bar">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-app-bar-title>Dream Life Property Ltd</v-app-bar-title>
@@ -157,7 +157,7 @@ const links = [
   cursor: pointer; /* Change the cursor to a pointer when hovering */
   color: #fff;
 }
-.v-navigation-drawer__content, .v-toolbar__content, .v-toolbar__extension{
+.v-navigation-drawer__content, #tool-bar .v-toolbar__content, #tool-bar .v-toolbar__extension{
     background: #049569 ;
 }
 
