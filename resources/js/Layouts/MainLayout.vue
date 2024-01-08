@@ -153,7 +153,7 @@ a {
   cursor: pointer; /* Change the cursor to a pointer when hovering */
   color: #fff;
 }.v-navigation-drawer__content{
-    /*background: #049569 ;*/
+    background: #049569 ;
 }
 
 .v-card {

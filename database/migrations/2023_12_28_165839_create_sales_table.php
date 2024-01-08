@@ -21,7 +21,9 @@ return new class extends Migration
             $table->unsignedBigInteger('plot_id')->nullable();
             $table->unsignedBigInteger('sales_officer_id')->nullable();
             $table->unsignedBigInteger('project_id')->nullable();
+            $table->unsignedBigInteger('client_id')->nullable();
 
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->foreign('plot_id')->references('id')->on('plots')->onDelete('cascade');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->foreign('sales_officer_id')->references('id')->on('saleofficers')->onDelete('cascade');
