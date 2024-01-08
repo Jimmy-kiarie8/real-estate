@@ -1,53 +1,70 @@
 <script setup>
-    import { Head, Link, useForm } from '@inertiajs/vue3';
-    import AuthenticationCard from '@/Components/AuthenticationCard.vue';
-    import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
-    import Checkbox from '@/Components/Checkbox.vue';
-    import InputError from '@/Components/InputError.vue';
-    import InputLabel from '@/Components/InputLabel.vue';
-    import PrimaryButton from '@/Components/PrimaryButton.vue';
-    import TextInput from '@/Components/TextInput.vue';
+import { Head, Link, useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
-    defineProps({
-        canResetPassword: Boolean,
-        status: String,
+defineProps({
+    canResetPassword: Boolean,
+    status: String,
+});
+
+const form = useForm({
+    email: '',
+    password: '',
+    remember: false,
+});
+const visible = ref(false);
+
+const submit = () => {
+    form.transform(data => ({
+        ...data,
+        remember: form.remember ? 'on' : '',
+    })).post(route('login'), {
+        onFinish: () => form.reset('password'),
     });
-
-    const form = useForm({
-        email: '',
-        password: '',
-        remember: false,
-    });
-
-    const submit = () => {
-        form.transform(data => ({
-            ...data,
-            remember: form.remember ? 'on' : '',
-        })).post(route('login'), {
-            onFinish: () => form.reset('password'),
-        });
-    };
-    </script>
+};
+</script>
 
 <template>
-    <form @submit.prevent="submit">
-        <div>
-            <v-card title=""  max-width="500" style="margin: auto;    margin-top: 200px;">
-            <v-card-title primary-title>
-                <img src="https://www.motorlabauto.com/wp-content/uploads/2021/07/motorlabauto-logo.png" />
-            </v-card-title>
-                <v-card-text>
-                    <v-text-field v-model="form.email" variant="outlined" autocomplete="username" label="Email"></v-text-field>
 
-                    <v-text-field v-model="form.password" variant="outlined" type="password" autocomplete="password" label="Password" required></v-text-field>
+<form @submit.prevent="submit">
+    <div>
+        <!-- <img src="/img/logo.png" /> -->
 
-                </v-card-text>
-                <v-card-actions>
-                    <v-btn color="info" class="mt-4" block @click="submit">
-                        Login
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
+      <v-img class="mx-auto my-6" max-width="328" src="/img/logo.png"></v-img>
+
+      <v-card class="mx-auto pa-12 pb-8" elevation="8" max-width="448" rounded="lg">
+        <div class="text-subtitle-1 text-medium-emphasis">Email</div>
+
+        <v-text-field v-model="form.email" autocomplete="email" density="compact" placeholder="Email address" prepend-inner-icon="mdi-email-outline" variant="outlined"></v-text-field>
+        <p class="mt-2" style="color: red">{{ form.errors.email }} </p>
+
+        <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
+          Password
+
+          <a class="text-caption text-decoration-none text-blue" href="#" rel="noopener noreferrer" target="_blank">
+            Forgot login password?</a>
         </div>
+
+        <v-text-field density="compact" type="password" autocomplete="password" v-model="form.password" placeholder="Enter your password" prepend-inner-icon="mdi-lock-outline" variant="outlined" @click:append-inner="visible = !visible"></v-text-field>
+        <p class="mt-2" style="color: red">{{ form.errors.password }} </p>
+
+        <v-card class="mb-12" color="surface-variant" variant="tonal">
+          <v-card-text class="text-medium-emphasis text-caption">
+            Warning: After 5 consecutive failed login attempts, you account will be temporarily locked for three hours. If you must login now, you can also click "Forgot login password?" below to reset the login password.
+          </v-card-text>
+        </v-card>
+
+        <v-btn block class="mb-8" color="blue" size="large" variant="tonal" @click="submit" :loading="form.processing">
+          Log In
+        </v-btn>
+
+        <!-- <v-card-text class="text-center">
+
+          <Link href="/register" class="text-blue text-decoration-none">
+            Sign up now <v-icon icon="mdi-chevron-right"></v-icon>
+          </Link>
+        </v-card-text> -->
+      </v-card>
+    </div>
     </form>
 </template>

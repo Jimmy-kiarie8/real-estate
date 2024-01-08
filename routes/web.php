@@ -32,6 +32,11 @@ use Inertia\Inertia;
 */
 
 
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
 Route::get('/', [DashboardController::class, 'analytics']);
 
 Route::resource('clients', ClientController::class);
@@ -67,11 +72,6 @@ Route::get('client_search/{search}', [ClientController::class, 'client_search'])
 // Dashboard
 
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
