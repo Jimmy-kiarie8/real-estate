@@ -39,7 +39,7 @@ const links = [
     // },
     {
         text: 'Plots',
-        link: '/plot',
+        link: '/plots',
         icon: 'mdi-badge-account-alert-outline',
         hasSub: false,
         subMenu: []
